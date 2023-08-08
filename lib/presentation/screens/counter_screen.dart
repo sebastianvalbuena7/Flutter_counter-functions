@@ -4,7 +4,7 @@ class CounterScreen extends StatefulWidget {
   const CounterScreen({super.key});
 
   @override
-  State<CounterScreen> createState() => _CounterScreenState();
+  State<StatefulWidget> createState() => _CounterScreenState();
 }
 
 class _CounterScreenState extends State<CounterScreen> {
@@ -13,25 +13,37 @@ class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Titulo'),
+      appBar: AppBar(
+        title: const Text('Counter Screen'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              '$clickCounter',
+              style:
+                  const TextStyle(fontSize: 160, fontWeight: FontWeight.w100),
+            ),
+            Text(
+              clickCounter == 1 ? 'Click' : 'Clicks',
+              style: const TextStyle(fontSize: 30),
+            )
+          ],
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text('$clickCounter', style: const TextStyle(fontSize: 160, fontWeight: FontWeight.w100)),
-              Text(clickCounter == 1 ? 'Click' : 'Clicks', style: const TextStyle(fontSize: 50, fontWeight: FontWeight.w400))
-            ],
-          ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          setState(() {
+            clickCounter++;
+          });
+        },
+        child: const Icon(
+          Icons.plus_one,
+          color: Colors.purple,
+          size: 30,
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            setState(() {
-              clickCounter++;
-            });
-          },
-          child: const Icon(Icons.plus_one),)
-      );
+      ),
+    );
   }
 }
